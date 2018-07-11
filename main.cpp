@@ -130,8 +130,10 @@ int main()
 				  }
 				  
 		}
+	
 
 	}
+ 	delete list;
 
 	
 
