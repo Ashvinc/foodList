@@ -13,9 +13,8 @@ food.o:
 	g++ -Wall -pedantic -g -c food.cpp
 
 clean:
-	rm -f *.exe
-	rm -f *.o
-	rm -f *.exe.stackdump
+	rm -f main
+	rm -f *.txt
 
 rmvobjects:
 	rm -f *.o
