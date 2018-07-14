@@ -115,6 +115,7 @@ void LinkedList::removeAllNodes(){
 
 void LinkedList::print(){
 	Node * head = this -> front;
+	Node * reset = this -> front;
 	int i = 1;
 	double totalprotein = 0;
 	double totalcarb = 0;
@@ -138,4 +139,8 @@ void LinkedList::print(){
 	cout << "Total carbs is: " << totalcarb << endl;
 	cout << "Total fat is: " << totalfat << endl;
        	cout << "Total calories is: " << totalprotein * PROTEINCAL + totalcarb * CARBCAL + totalfat * FATCAL << endl;
+	totalprotein = 0;
+	totalcarb = 0;
+	totalfat = 0;
+	head = reset;
 }

@@ -111,10 +111,11 @@ int main()
 
 
 	readFromFile(list);
-	while (cin)
+	int label = 0;
+	while (cin && label == 0)
 	{
 		command = 'z';      //resets the character
-		cout << "Please enter a command ((a)dd, (r)emove, (p)rint, (d)elete the list, (c)opy the list)";
+		cout << "Please enter a command ((a)dd, (r)emove, (p)rint, (d)elete the list, (c)opy the list, (m)ake a summary)";
 		cin >> command;
 		cout << endl;
 
@@ -179,21 +180,64 @@ int main()
 						  remove("output.txt");
 						  list -> removeAllNodes(); 
 					  }
+					  label = 1;
 					  break;
 				  }
+			case 'm': {
+					  ofstream myfile;
+					  cout << "please enter the filename of the summary you wish to create with extension" << endl;
+					  cin.ignore();
+					  getline(cin, filename);
+					  int n = filename.length();
+					  char *namearray = new char[n+1];
+					  strcpy(namearray, filename.c_str());
+					  remove(namearray);
+					  freopen(namearray, "a+", stdout);
+				          list -> print();
+					  fclose(stdout);
+					  label = 1;
+
+					  break;
+				  }
+
 			case 'c': {
-					//CopyFile("output.txt" , "copy.txt");
+					cout << "Would you like to copy (t)o a file or (f)rom a file" << endl;
+					cin >> command;
+					if( command == 'f')
+					{
+						cout << "Please enter the filename you wish to copy from with extension: " << endl;
+						cin.ignore();
+						getline(cin, filename);
+						cout << "Would you like to (a)ppend to the list or (r)eplace it?" << endl;
+						cin >> command;
+						if (command == 'R' || command == 'r')
+						{
+						list -> removeAllNodes();
+						remove("output.txt");
+						}
+						CopyFile(filename, "output.txt");
+						readFromFile(list);
+					}
+					
+					else if(command == 't')
+					{
 					cout << "Please enter the filename with the extension to be copied to: " << endl;
 					cin.ignore();
 					getline(cin, filename);
 					//remove(filename);
 					int n = filename.length();
-					char *name_array= new char[n+1];
-					strcpy(name_array, filename.c_str());
-					remove(name_array);
+					char *namearray= new char[n+1];
+					strcpy(namearray, filename.c_str());
+					remove(namearray);
 					CopyFile("output.txt" , filename);
-					delete[] name_array;
+					delete[] namearray;
+					}
+					else
+					{
+						cout << "no copy occurred" << endl;
+					}
 				  }
+			
 		}
 
 	}
