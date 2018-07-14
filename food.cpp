@@ -1,5 +1,10 @@
 #include <iostream>
 #include <cstdlib>
+
+#define PROTEINCAL 4
+#define CARBCAL 4
+#define FATCAL 9
+
 using namespace std;
 //header
 class Node
@@ -111,14 +116,26 @@ void LinkedList::removeAllNodes(){
 void LinkedList::print(){
 	Node * head = this -> front;
 	int i = 1;
+	double totalprotein = 0;
+	double totalcarb = 0;
+	double totalfat = 0;
 	while(head){
 		cout << head -> name << endl;
 		cout << head -> servings << " servings of " << head -> name << " : "<< endl;
 	        cout <<"protein : " << (double)(head -> protein) << endl; 
+		totalprotein += (double)(head -> protein);
 		cout <<"carbs : " << (double)(head -> carbs) << endl;
+		totalcarb += (double)(head -> carbs);
 		cout <<"fat : " << (double)(head -> fat) << endl;
+		totalfat += (double)(head -> fat);
+		cout <<"calories : " << (double)(head -> protein) * PROTEINCAL + (double)(head -> carbs) * CARBCAL +
+			(double)(head -> fat) * FATCAL << endl;
 		cout << endl;
 		head = head -> next;
 		i++;
 	}
+	cout << "Total protein is: " << totalprotein << endl;
+	cout << "Total carbs is: " << totalcarb << endl;
+	cout << "Total fat is: " << totalfat << endl;
+       	cout << "Total calories is: " << totalprotein * PROTEINCAL + totalcarb * CARBCAL + totalfat * FATCAL << endl;
 }
